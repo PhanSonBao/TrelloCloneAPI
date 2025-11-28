@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrelloClone.DAL", "TrelloClone.DAL\TrelloClone.DAL.csproj", "{5EB7FC82-271B-4701-917C-7B0E42F1495A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrelloClone.BLL", "TrelloClone.BLL\TrelloClone.BLL.csproj", "{B6C9545A-040C-4DB4-A992-907B161C1CF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrelloClone.API", "TrelloClone.API\TrelloClone.API.csproj", "{F14C92C5-FD74-41CE-A88C-8D4267AFB295}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5EB7FC82-271B-4701-917C-7B0E42F1495A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EB7FC82-271B-4701-917C-7B0E42F1495A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EB7FC82-271B-4701-917C-7B0E42F1495A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EB7FC82-271B-4701-917C-7B0E42F1495A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6C9545A-040C-4DB4-A992-907B161C1CF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6C9545A-040C-4DB4-A992-907B161C1CF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6C9545A-040C-4DB4-A992-907B161C1CF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6C9545A-040C-4DB4-A992-907B161C1CF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F14C92C5-FD74-41CE-A88C-8D4267AFB295}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F14C92C5-FD74-41CE-A88C-8D4267AFB295}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F14C92C5-FD74-41CE-A88C-8D4267AFB295}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F14C92C5-FD74-41CE-A88C-8D4267AFB295}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
