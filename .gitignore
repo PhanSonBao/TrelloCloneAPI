@@ -50,3 +50,5 @@ msbuild.wrn
 
 # appsettings
 appsettings.json
+# env
+.evn
