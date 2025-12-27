@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using TrelloClone.DAL.Entities;
 
 namespace TrelloClone.DAL.DBContext;
 
@@ -14,6 +15,9 @@ public class AppDbContext : DbContext
     }
     
     public virtual DbSet<User> Users { get; set; }
+    public virtual DbSet<Board> Boards { get; set; }
+    public virtual DbSet<Card>  Cards { get; set; }
+    public virtual DbSet<CardList> CardLists { get; set; }
 
     private string GetConnectionString()
     {

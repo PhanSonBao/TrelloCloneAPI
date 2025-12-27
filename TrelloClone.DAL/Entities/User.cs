@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using TrelloClone.DAL.Entities;
 
 namespace TrelloClone.DAL;
 
@@ -11,4 +12,6 @@ public class User
     [Required] //Not null
     [StringLength(250)] //Giới hạn kí tự
     public string Name { get; set; }
+    
+    public ICollection<Board> Boards { get; set; }
 }

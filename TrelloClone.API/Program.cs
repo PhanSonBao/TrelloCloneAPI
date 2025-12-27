@@ -1,4 +1,20 @@
+using Microsoft.EntityFrameworkCore;
+using TrelloClone.DAL.DBContext;
+using TrelloClone.DAL.Entities;
+using TrelloClone.DAL.Interfaces;
+using TrelloClone.DAL.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Add DbContext
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddControllers();
+
+// DAL registrations
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped<IBoardRepository, BoardRepository>();
+
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -9,7 +9,6 @@
     <ItemGroup>
       <Folder Include="DALServices\" />
       <Folder Include="IDALServices\" />
-      <Folder Include="Repositories\" />
     </ItemGroup>
 
     <ItemGroup>
