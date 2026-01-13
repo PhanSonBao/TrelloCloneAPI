@@ -1,4 +1,4 @@
-namespace TrelloClone.BLL.DTOs;
+namespace TrelloClone.BLL.DTOs.Cards;
 
 public class CardDto
 {

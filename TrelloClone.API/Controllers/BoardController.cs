@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using TrelloClone.BLL.IServices;
-using TrelloClone.BLL.DTOs;
+using TrelloClone.BLL.DTOs.Boards;
 
 namespace TrelloClone.API.Controllers;
 [ApiController]
@@ -18,9 +18,10 @@ public class BoardController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(BoardDto dto)
+    public async Task<IActionResult> Create(CreateBoardDto dto)
     {
-        await _boardService.BoardAsync(dto);
-        return CreatedAtAction(nameof(Get), new {id = 111111}, null);
+        await _boardService.CreateBoardAsync(dto);
+        // Id tạm thời, sửa sau
+        return CreatedAtAction(nameof(Get), new {id = 0}, null);
     }
 }

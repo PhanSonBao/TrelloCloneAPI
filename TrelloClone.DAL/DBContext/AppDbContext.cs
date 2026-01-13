@@ -17,7 +17,7 @@ public class AppDbContext : DbContext
     public virtual DbSet<User> Users { get; set; }
     public virtual DbSet<Board> Boards { get; set; }
     public virtual DbSet<Card>  Cards { get; set; }
-    public virtual DbSet<CardList> CardLists { get; set; }
+    public virtual DbSet<List> Lists { get; set; }
 
     private string GetConnectionString()
     {

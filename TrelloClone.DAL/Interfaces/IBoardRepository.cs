@@ -15,7 +15,7 @@ public class BoardRepository(AppDbContext context) : Repository<Board>(context),
     public async Task<Board?> GetBoardWithListAsync(int id)
     {
         return await _dbSet
-            .Include(b => b.CardLists.OrderBy(cl => cl.Position))
+            .Include(b => b.Lists.OrderBy(cl => cl.Position))
             .FirstOrDefaultAsync(b => b.Id == id);
     }
 }

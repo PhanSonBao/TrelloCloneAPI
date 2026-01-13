@@ -1,6 +1,7 @@
 using TrelloClone.DAL.Interfaces;
 using TrelloClone.BLL.IServices;
-using TrelloClone.BLL.DTOs;
+using TrelloClone.BLL.DTOs.Boards;
+using TrelloClone.BLL.DTOs.Lists;
 using TrelloClone.DAL.Entities;
 
 namespace TrelloClone.BLL.Services;
@@ -21,7 +22,7 @@ public class BoardService : IBoardService
         
         // mapping enitty -> dto (Auto Mapper hoặc manual)
         return new BoardDto{Id = board.Id, Title = board.Title,
-            CardLists = board.CardLists.Select(cl => new CardListsDto
+            Lists = board.Lists.Select(cl => new ListDto
             {
                 Id = cl.Id,
                 Title = cl.Title,
@@ -29,10 +30,11 @@ public class BoardService : IBoardService
         };
     }
 
-    public async Task CreateBoardAsync(BoardDto dto)
+    public async Task<int> CreateBoardAsync(CreateBoardDto dto)
     {
         var board = new Board { Title = dto.Title, UserId = dto.UserId };
-        await _boardRepository.AddAsync((board));
+        await _boardRepository.AddAsync(board);
         await _boardRepository.SaveChangesAsync();
+        return board.Id;
     }
 }

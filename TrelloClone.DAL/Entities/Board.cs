@@ -13,6 +13,6 @@ namespace TrelloClone.DAL.Entities
         
         // Navigation
         public User user { get; set; }
-        public ICollection<CardList> CardLists { get; set; }
+        public ICollection<List> Lists { get; set; }
     }
 }

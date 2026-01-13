@@ -11,7 +11,7 @@ namespace TrelloClone.DAL
 
         // FK
         public int CardListId { get; set; }
-        public CardList CardListList { get; set; }
+        public List ListList { get; set; }
     }
 };
 

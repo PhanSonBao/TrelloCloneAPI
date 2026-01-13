@@ -2,7 +2,7 @@ using System;
 
 namespace TrelloClone.DAL.Entities
 {
-    public class CardList
+    public class List
     {
         public int Id { get; set; }
         public string Title { get; set; }
