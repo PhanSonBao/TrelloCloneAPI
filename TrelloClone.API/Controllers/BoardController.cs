@@ -18,10 +18,9 @@ public class BoardController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(CreateBoardDto dto)
+    public async Task<IActionResult> Create([FromBody] CreateBoardDto dto)
     {
-        await _boardService.CreateBoardAsync(dto);
-        // Id tạm thời, sửa sau
-        return CreatedAtAction(nameof(Get), new {id = 0}, null);
+        var boardId = await _boardService.CreateBoardAsync(dto);
+        return CreatedAtAction(nameof(Get), new {id = boardId}, null);
     }
 }

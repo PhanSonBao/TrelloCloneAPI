@@ -18,4 +18,11 @@ public class BoardRepository(AppDbContext context) : Repository<Board>(context),
             .Include(b => b.Lists.OrderBy(cl => cl.Position))
             .FirstOrDefaultAsync(b => b.Id == id);
     }
+
+    // public async Task<Board> CreateBoardWithAsync()
+    // {
+    //     return await _dbSet
+    //         .Include(b => b.Lists.OrderBy(cl => cl.Position))
+    //         .FirstOrDefault();
+    // }
 }

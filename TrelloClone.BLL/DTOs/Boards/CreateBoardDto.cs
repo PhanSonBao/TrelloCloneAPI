@@ -4,4 +4,5 @@ public class CreateBoardDto
 {
     public string Title { get; set; } = string.Empty;
     public int  UserId { get; set; }
+    public DateTime CreteAt = DateTime.UtcNow;
 }

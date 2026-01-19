@@ -32,7 +32,7 @@ public class BoardService : IBoardService
 
     public async Task<int> CreateBoardAsync(CreateBoardDto dto)
     {
-        var board = new Board { Title = dto.Title, UserId = dto.UserId };
+        var board = new Board { Title = dto.Title, UserId = dto.UserId, CreatedAt = dto.CreteAt};
         await _boardRepository.AddAsync(board);
         await _boardRepository.SaveChangesAsync();
         return board.Id;

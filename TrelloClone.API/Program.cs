@@ -13,7 +13,7 @@ builder.Services.AddControllers();
 
 // DAL registrations
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-builder.Services.AddScoped<IBoardRepository, BoardRepository>();
+// builder.Services.AddScoped<IBoardRepository, BoardRepository>();
 
 
 // Add services to the container.
@@ -51,6 +51,7 @@ app.MapGet("/weatherforecast", () =>
     })
     .WithName("GetWeatherForecast")
     .WithOpenApi();
+app.MapControllers();
 
 app.Run();
 
