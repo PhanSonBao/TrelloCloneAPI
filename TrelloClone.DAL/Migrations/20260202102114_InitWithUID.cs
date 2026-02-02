@@ -6,16 +6,29 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TrelloClone.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class AddBoardListCard : Migration
+    public partial class InitWithUID : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    UID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.UID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Boards",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    UID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -23,34 +36,33 @@ namespace TrelloClone.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Boards", x => x.Id);
+                    table.PrimaryKey("PK_Boards", x => x.UID);
                     table.ForeignKey(
                         name: "FK_Boards_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
+                        principalColumn: "UID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "CardLists",
+                name: "Lists",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    UID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Position = table.Column<int>(type: "int", nullable: false),
-                    BoradId = table.Column<int>(type: "int", nullable: false),
                     BoardId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CardLists", x => x.Id);
+                    table.PrimaryKey("PK_Lists", x => x.UID);
                     table.ForeignKey(
-                        name: "FK_CardLists_Boards_BoardId",
+                        name: "FK_Lists_Boards_BoardId",
                         column: x => x.BoardId,
                         principalTable: "Boards",
-                        principalColumn: "Id",
+                        principalColumn: "UID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -58,22 +70,22 @@ namespace TrelloClone.DAL.Migrations
                 name: "Cards",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    UID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Position = table.Column<int>(type: "int", nullable: false),
-                    ListId = table.Column<int>(type: "int", nullable: false),
-                    CardListListId = table.Column<int>(type: "int", nullable: false)
+                    CardListId = table.Column<int>(type: "int", nullable: false),
+                    ListListUID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cards", x => x.Id);
+                    table.PrimaryKey("PK_Cards", x => x.UID);
                     table.ForeignKey(
-                        name: "FK_Cards_CardLists_CardListListId",
-                        column: x => x.CardListListId,
-                        principalTable: "CardLists",
-                        principalColumn: "Id",
+                        name: "FK_Cards_Lists_ListListUID",
+                        column: x => x.ListListUID,
+                        principalTable: "Lists",
+                        principalColumn: "UID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -83,14 +95,14 @@ namespace TrelloClone.DAL.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CardLists_BoardId",
-                table: "CardLists",
-                column: "BoardId");
+                name: "IX_Cards_ListListUID",
+                table: "Cards",
+                column: "ListListUID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cards_CardListListId",
-                table: "Cards",
-                column: "CardListListId");
+                name: "IX_Lists_BoardId",
+                table: "Lists",
+                column: "BoardId");
         }
 
         /// <inheritdoc />
@@ -100,10 +112,13 @@ namespace TrelloClone.DAL.Migrations
                 name: "Cards");
 
             migrationBuilder.DropTable(
-                name: "CardLists");
+                name: "Lists");
 
             migrationBuilder.DropTable(
                 name: "Boards");
+
+            migrationBuilder.DropTable(
+                name: "Users");
         }
     }
 }

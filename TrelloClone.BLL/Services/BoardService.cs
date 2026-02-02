@@ -21,11 +21,11 @@ public class BoardService : IBoardService
         if (board == null) throw new KeyNotFoundException("Board not found");
         
         // mapping enitty -> dto (Auto Mapper hoặc manual)
-        return new BoardDto{Id = board.Id, Title = board.Title,
-            Lists = board.Lists.Select(cl => new ListDto
+        return new BoardDto{UID = board.UID, Title = board.Title,
+            Lists = board.Lists.Select(l => new ListDto
             {
-                Id = cl.Id,
-                Title = cl.Title,
+                Id = l.UID,
+                Title = l.Title,
             }).ToList()
         };
     }
@@ -35,6 +35,6 @@ public class BoardService : IBoardService
         var board = new Board { Title = dto.Title, UserId = dto.UserId, CreatedAt = dto.CreteAt};
         await _boardRepository.AddAsync(board);
         await _boardRepository.SaveChangesAsync();
-        return board.Id;
+        return board.UID;
     }
 }

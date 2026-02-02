@@ -22,42 +22,13 @@ namespace TrelloClone.DAL.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("TrelloClone.DAL.Card", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CardListId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Position")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CardListId");
-
-                    b.ToTable("Cards");
-                });
-
             modelBuilder.Entity("TrelloClone.DAL.Entities.Board", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("UID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UID"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -69,20 +40,52 @@ namespace TrelloClone.DAL.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("UID");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("Boards");
                 });
 
-            modelBuilder.Entity("TrelloClone.DAL.Entities.CardList", b =>
+            modelBuilder.Entity("TrelloClone.DAL.Entities.Card", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("UID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UID"));
+
+                    b.Property<int>("CardListId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ListListUID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Position")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UID");
+
+                    b.HasIndex("ListListUID");
+
+                    b.ToTable("Cards");
+                });
+
+            modelBuilder.Entity("TrelloClone.DAL.Entities.List", b =>
+                {
+                    b.Property<int>("UID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UID"));
 
                     b.Property<int>("BoardId")
                         .HasColumnType("int");
@@ -94,45 +97,34 @@ namespace TrelloClone.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("UID");
 
                     b.HasIndex("BoardId");
 
-                    b.ToTable("CardLists");
+                    b.ToTable("Lists");
                 });
 
-            modelBuilder.Entity("TrelloClone.DAL.User", b =>
+            modelBuilder.Entity("TrelloClone.DAL.Entities.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("UID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UID"));
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
-                    b.HasKey("Id");
+                    b.HasKey("UID");
 
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("TrelloClone.DAL.Card", b =>
-                {
-                    b.HasOne("TrelloClone.DAL.Entities.CardList", "CardListList")
-                        .WithMany("Cards")
-                        .HasForeignKey("CardListId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CardListList");
-                });
-
             modelBuilder.Entity("TrelloClone.DAL.Entities.Board", b =>
                 {
-                    b.HasOne("TrelloClone.DAL.User", "user")
+                    b.HasOne("TrelloClone.DAL.Entities.User", "user")
                         .WithMany("Boards")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -141,10 +133,21 @@ namespace TrelloClone.DAL.Migrations
                     b.Navigation("user");
                 });
 
-            modelBuilder.Entity("TrelloClone.DAL.Entities.CardList", b =>
+            modelBuilder.Entity("TrelloClone.DAL.Entities.Card", b =>
+                {
+                    b.HasOne("TrelloClone.DAL.Entities.List", "ListList")
+                        .WithMany("Cards")
+                        .HasForeignKey("ListListUID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ListList");
+                });
+
+            modelBuilder.Entity("TrelloClone.DAL.Entities.List", b =>
                 {
                     b.HasOne("TrelloClone.DAL.Entities.Board", "Board")
-                        .WithMany("CardLists")
+                        .WithMany("Lists")
                         .HasForeignKey("BoardId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -154,15 +157,15 @@ namespace TrelloClone.DAL.Migrations
 
             modelBuilder.Entity("TrelloClone.DAL.Entities.Board", b =>
                 {
-                    b.Navigation("CardLists");
+                    b.Navigation("Lists");
                 });
 
-            modelBuilder.Entity("TrelloClone.DAL.Entities.CardList", b =>
+            modelBuilder.Entity("TrelloClone.DAL.Entities.List", b =>
                 {
                     b.Navigation("Cards");
                 });
 
-            modelBuilder.Entity("TrelloClone.DAL.User", b =>
+            modelBuilder.Entity("TrelloClone.DAL.Entities.User", b =>
                 {
                     b.Navigation("Boards");
                 });

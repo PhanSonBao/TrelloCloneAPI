@@ -1,10 +1,11 @@
-using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace TrelloClone.DAL.Entities
 {
     public class List
     {
-        public int Id { get; set; }
+        [Key]
+        public int UID { get; set; }
         public string Title { get; set; }
         public int Position { get; set; } // Để kéo thả reorder
         

@@ -19,7 +19,7 @@ public class AppDbContext : DbContext
     public virtual DbSet<Card>  Cards { get; set; }
     public virtual DbSet<List> Lists { get; set; }
 
-    private string GetConnectionString()
+    private static string GetConnectionString()
     {
         IConfiguration configuration = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
@@ -27,15 +27,15 @@ public class AppDbContext : DbContext
             .Build();
         return configuration.GetConnectionString("DefaultConnectionString") ?? string.Empty;
     }
-
+    
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlServer(GetConnectionString());
     }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        //Set up ràng buộc dữ liệu
-        //Fluent API
-    }
+    // protected override void OnModelCreating(ModelBuilder modelBuilder)
+    // {
+    //     //Set up ràng buộc dữ liệu
+    //     //Fluent API
+    // }
 }

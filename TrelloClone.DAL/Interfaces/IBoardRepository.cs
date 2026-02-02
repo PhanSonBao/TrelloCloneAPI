@@ -7,16 +7,16 @@ namespace TrelloClone.DAL.Interfaces;
 
 public interface IBoardRepository : IRepository<Board> 
 {
-    Task<Board?> GetBoardWithListAsync(int id);
+    Task<Board?> GetBoardWithListAsync(int uid);
 }
 
 public class BoardRepository(AppDbContext context) : Repository<Board>(context), IBoardRepository
 {
-    public async Task<Board?> GetBoardWithListAsync(int id)
+    public async Task<Board?> GetBoardWithListAsync(int uid)
     {
         return await _dbSet
             .Include(b => b.Lists.OrderBy(cl => cl.Position))
-            .FirstOrDefaultAsync(b => b.Id == id);
+            .FirstOrDefaultAsync(b => b.UID == uid);
     }
 
     // public async Task<Board> CreateBoardWithAsync()

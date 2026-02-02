@@ -1,11 +1,11 @@
-using Microsoft.EntityFrameworkCore;
-using TrelloClone.DAL.DBContext;
+using System.ComponentModel.DataAnnotations;
 
 namespace TrelloClone.DAL.Entities
 {
     public class Board
     {
-        public int Id { get; set; }
+        [Key]
+        public int UID { get; set; }
         public string Title { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         //FK

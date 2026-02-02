@@ -19,7 +19,7 @@ public class ListService : IListService
         var lists = await _listRepository.GetByBoardIdAsync(boardId);
         return lists.Select(item => new ListDto()
         {
-            Id = item.Id,
+            Id = item.UID,
             Title = item.Title,
         }).ToList();
     }
@@ -29,6 +29,6 @@ public class ListService : IListService
         var list = new List { Title = dto.Title, BoardId =  boardId };
         await _listRepository.AddAsync(list);
         await _listRepository.SaveChangesAsync();
-        return list.Id;
+        return list.UID;
     }
 }

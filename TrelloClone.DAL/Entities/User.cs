@@ -1,13 +1,12 @@
 using System.ComponentModel.DataAnnotations;
-using TrelloClone.DAL.Entities;
 
-namespace TrelloClone.DAL;
+namespace TrelloClone.DAL.Entities;
 
 public class User
 {
     //Data Annotations
     [Key] //Xác định khóa chính
-    public int Id { get; set; }
+    public int UID { get; set; }
     
     [Required] //Not null
     [StringLength(250)] //Giới hạn kí tự

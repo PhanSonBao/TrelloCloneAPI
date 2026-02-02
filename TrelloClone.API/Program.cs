@@ -1,8 +1,11 @@
 using Microsoft.EntityFrameworkCore;
+using TrelloClone.BLL.IServices;
+using TrelloClone.BLL.Services;
 using TrelloClone.DAL.DBContext;
 using TrelloClone.DAL.Entities;
 using TrelloClone.DAL.Interfaces;
 using TrelloClone.DAL.Repositories;
+using BoardRepository = TrelloClone.DAL.Interfaces.BoardRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,9 +14,12 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddControllers();
 
+// BLL Service registrations
+builder.Services.AddScoped<IBoardService, BoardService>();
+
 // DAL registrations
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-// builder.Services.AddScoped<IBoardRepository, BoardRepository>();
+builder.Services.AddScoped<IBoardRepository, BoardRepository>();
 
 
 // Add services to the container.
