@@ -5,12 +5,12 @@ namespace TrelloClone.DAL.Entities
     public class List
     {
         [Key]
-        public int UID { get; set; }
+        public Guid UID { get; set; }
         public string Title { get; set; }
         public int Position { get; set; } // Để kéo thả reorder
         
         // FK
-        public int BoardId { get; set; }
+        public Guid BoardId { get; set; }
         
         //Navigation
         public Board Board { get; set; }

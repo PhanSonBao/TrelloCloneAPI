@@ -6,18 +6,11 @@ using TrelloClone.DAL.Entities;
 
 namespace TrelloClone.BLL.Services;
 
-public class BoardService : IBoardService
+public class BoardService(IBoardRepository boardRepository) : IBoardService
 {
-    private readonly IBoardRepository _boardRepository;
-
-    public BoardService(IBoardRepository boardRepository)
+    public async Task<BoardDto> GetBoardAsync(Guid id)
     {
-        _boardRepository = boardRepository;
-    }
-
-    public async Task<BoardDto> GetBoardAsync(int id)
-    {
-        var board = await _boardRepository.GetBoardWithListAsync(id);
+        var board = await boardRepository.GetBoardWithListAsync(id);
         if (board == null) throw new KeyNotFoundException("Board not found");
         
         // mapping enitty -> dto (Auto Mapper hoặc manual)
@@ -30,11 +23,11 @@ public class BoardService : IBoardService
         };
     }
 
-    public async Task<int> CreateBoardAsync(CreateBoardDto dto)
+    public async Task<Guid> CreateBoardAsync(CreateBoardDto dto)
     {
         var board = new Board { Title = dto.Title, UserId = dto.UserId, CreatedAt = dto.CreteAt};
-        await _boardRepository.AddAsync(board);
-        await _boardRepository.SaveChangesAsync();
+        await boardRepository.AddAsync(board);
+        await boardRepository.SaveChangesAsync();
         return board.UID;
     }
 }

@@ -4,7 +4,7 @@ namespace TrelloClone.BLL.DTOs.Boards;
 
 public class BoardDto
 {
-    public int UID { get; set; }
+    public Guid UID { get; set; }
     public string Title { get; set; } = string.Empty;
     public DateTime CreatedAt { get; set; }
     public int UserId { get; set; }

@@ -49,7 +49,7 @@ public class BoardRepository : IBoardRepository
         throw new NotImplementedException();
     }
 
-    public Task<Board?> GetBoardWithListAsync(int id)
+    public Task<Board?> GetBoardWithListAsync(Guid id)
     {
         throw new NotImplementedException();
     }

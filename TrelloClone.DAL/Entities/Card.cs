@@ -5,14 +5,14 @@ namespace TrelloClone.DAL.Entities
     public class Card
     {
         [Key]
-        public int UID { get; set; }
+        public Guid UID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public int Position { get; set; }
 
         // FK
-        public int CardListId { get; set; }
-        public List ListList { get; set; }
+        public Card ListId { get; set; }
+        public List List { get; set; }
     }
 };
 

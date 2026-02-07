@@ -14,7 +14,7 @@ public class ListService : IListService
         _listRepository = listRepository;
     }
 
-    public async Task<List<ListDto>> GetByBoardAsync(int boardId)
+    public async Task<List<ListDto>> GetByBoardAsync(Guid boardId)
     {
         var lists = await _listRepository.GetByBoardIdAsync(boardId);
         return lists.Select(item => new ListDto()
@@ -24,7 +24,7 @@ public class ListService : IListService
         }).ToList();
     }
 
-    public async Task<int> CreateListAsync(int boardId, CreateListDto dto)
+    public async Task<int> CreateListAsync(Guid boardId, CreateListDto dto)
     {
         var list = new List { Title = dto.Title, BoardId =  boardId };
         await _listRepository.AddAsync(list);
