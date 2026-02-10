@@ -9,7 +9,7 @@ namespace TrelloClone.DAL.Entities
         public string Title { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         //FK
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
         
         // Navigation
         public User user { get; set; }

@@ -4,6 +4,6 @@ namespace TrelloClone.BLL.IServices;
 
 public interface IListService
 {
-    Task<List<ListDto>>  GetByBoardAsync(int boardId);
-    Task<int> CreateListAsync(int boardId, CreateListDto dto);
+    Task<List<ListDto>>  GetByBoardAsync(Guid boardId);
+    Task<Guid> CreateListAsync(Guid boardId, CreateListDto dto);
 }

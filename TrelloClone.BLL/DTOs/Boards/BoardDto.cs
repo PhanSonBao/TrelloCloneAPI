@@ -7,6 +7,6 @@ public class BoardDto
     public Guid UID { get; set; }
     public string Title { get; set; } = string.Empty;
     public DateTime CreatedAt { get; set; }
-    public int UserId { get; set; }
+    public Guid UserId { get; set; }
     public List<ListDto> Lists { get; set; } = new();
 }

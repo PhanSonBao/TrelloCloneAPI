@@ -15,14 +15,14 @@ public class ListController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> Get(int boardId)
+    public async Task<IActionResult> Get(Guid boardId)
     {
         var list = await _listService.GetByBoardAsync(boardId);
         return Ok(list);
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(int boardId, CreateListDto dto)
+    public async Task<IActionResult> Create(Guid boardId, CreateListDto dto)
     {
         var id = await _listService.CreateListAsync(boardId, dto);
         return CreatedAtAction(nameof(Get), new {boardId = id}, null);

@@ -14,7 +14,7 @@ public class ListRepository : IListRepository
         _dbContext = dbContext;
     }
 
-    public async Task<List<List>> GetByBoardIdAsync(int boardId)
+    public async Task<List<List>> GetByBoardIdAsync(Guid boardId)
     {
         return await _dbContext.Lists.Where(l => l.BoardId == boardId).ToListAsync();
     }

@@ -11,8 +11,8 @@ namespace TrelloClone.DAL.Entities
         public int Position { get; set; }
 
         // FK
-        public Card ListId { get; set; }
-        public List List { get; set; }
+        public Guid ListId { get; set; }
+        public List? List { get; set; }
     }
 };
 

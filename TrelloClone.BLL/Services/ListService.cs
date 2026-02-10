@@ -24,7 +24,7 @@ public class ListService : IListService
         }).ToList();
     }
 
-    public async Task<int> CreateListAsync(Guid boardId, CreateListDto dto)
+    public async Task<Guid> CreateListAsync(Guid boardId, CreateListDto dto)
     {
         var list = new List { Title = dto.Title, BoardId =  boardId };
         await _listRepository.AddAsync(list);

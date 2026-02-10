@@ -11,7 +11,7 @@ public class BoardController : ControllerBase
     public BoardController(IBoardService boardService) => _boardService = boardService;
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> Get(int id)
+    public async Task<IActionResult> Get(Guid id)
     {
         var board = await _boardService.GetBoardAsync(id);
         return Ok(board);
